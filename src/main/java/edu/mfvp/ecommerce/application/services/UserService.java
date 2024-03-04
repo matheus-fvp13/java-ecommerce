@@ -1,6 +1,6 @@
 package edu.mfvp.ecommerce.application.services;
 
-import edu.mfvp.ecommerce.domain.user.User;
+import edu.mfvp.ecommerce.domain.User;
 import edu.mfvp.ecommerce.application.gateways.UserGateway;
 
 import java.util.List;

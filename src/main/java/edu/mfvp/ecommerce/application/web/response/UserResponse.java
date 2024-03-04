@@ -1,6 +1,6 @@
 package edu.mfvp.ecommerce.application.web.response;
 
-import edu.mfvp.ecommerce.domain.user.User;
+import edu.mfvp.ecommerce.domain.User;
 
 public record UserResponse(
         Long id,
@@ -9,6 +9,6 @@ public record UserResponse(
         String phone
 ) {
     public static UserResponse toUserResponse(User user) {
-        return new UserResponse(user.id(), user.name(), user.email(), user.phone());
+        return new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getPhone());
     }
 }

@@ -1,7 +1,7 @@
 package edu.mfvp.ecommerce.infra.database.gateways;
 
 import edu.mfvp.ecommerce.application.gateways.UserGateway;
-import edu.mfvp.ecommerce.domain.user.User;
+import edu.mfvp.ecommerce.domain.User;
 import edu.mfvp.ecommerce.infra.database.entities.UserEntity;
 import edu.mfvp.ecommerce.infra.database.repositories.UserRepository;
 import org.springframework.stereotype.Component;

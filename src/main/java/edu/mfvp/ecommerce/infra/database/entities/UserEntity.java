@@ -1,28 +1,26 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
-import edu.mfvp.ecommerce.domain.user.User;
+import edu.mfvp.ecommerce.domain.User;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "tb_user")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserEntity extends AbstractEntity {
     private String name;
     private String email;
     private String phone;
     private String password;
+    @OneToMany(mappedBy = "client")
+    private List<OrderEntity> orders = new ArrayList<>();
 
     public UserEntity() {
     }
 
     public UserEntity(Long id, String name, String email, String phone, String password) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -34,11 +32,7 @@ public class UserEntity {
     }
 
     public static UserEntity fromUser(User user) {
-        return new UserEntity(user.id(), user.name(), user.email(), user.phone(), user.password());
-    }
-
-    public Long getId() {
-        return id;
+        return new UserEntity(user.getId(), user.getName(), user.getEmail(), user.getPhone(), user.getPassword());
     }
 
     public String getName() {
@@ -57,16 +51,7 @@ public class UserEntity {
         return password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public List<OrderEntity> getOrders() {
+        return orders;
     }
 }
