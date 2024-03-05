@@ -11,6 +11,7 @@ public class Order extends AbstractEntity {
     private Instant moment;
     private Integer orderStatus;
     private User client;
+    private Payment payment;
     private Set<OrderItem> items = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
@@ -44,6 +45,14 @@ public class Order extends AbstractEntity {
 
     public void setClient(User user) {
         this.client = user;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Set<OrderItem> getItems() {

@@ -1,5 +1,6 @@
 package edu.mfvp.ecommerce.infra.seed;
 
+import edu.mfvp.ecommerce.domain.entities.Payment;
 import edu.mfvp.ecommerce.domain.enums.OrderStatus;
 import edu.mfvp.ecommerce.infra.database.entities.*;
 import edu.mfvp.ecommerce.infra.database.repositories.*;
@@ -53,7 +54,7 @@ public class UserSeed implements CommandLineRunner {
         UserEntity user1 = new UserEntity(null, "Matheus Vieira", "mfvp@gmail.com", "(15)11234-8978", "1234");
         UserEntity user2 = new UserEntity(null, "Paula Oliveira", "paula@gmail.com", "(15)11134-9978", "1254");
 
-        OrderEntity o1 = new OrderEntity(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.SHIPPED.getCode(), user1);
+        OrderEntity o1 = new OrderEntity(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.WAITING_PAYMENT.getCode(), user1);
         OrderEntity o2 = new OrderEntity(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.PAID.getCode(), user2);
         OrderEntity o3 = new OrderEntity(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT.getCode(), user1);
 
@@ -66,5 +67,9 @@ public class UserSeed implements CommandLineRunner {
         OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4));
+
+        PaymentEntity payment = new PaymentEntity(null, Instant.parse("2019-07-21T05:42:10Z"), o2);
+        o2.setPayment(payment);
+        orderRepository.save(o2);
     }
 }

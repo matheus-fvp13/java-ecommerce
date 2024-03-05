@@ -21,6 +21,8 @@ public class OrderEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private PaymentEntity payment;
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItemEntity> items = new HashSet<>();
 
@@ -62,6 +64,14 @@ public class OrderEntity extends AbstractEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public PaymentEntity getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
     }
 
     public Set<OrderItemEntity> getItems() {
