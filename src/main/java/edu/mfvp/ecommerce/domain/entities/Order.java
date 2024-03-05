@@ -22,6 +22,10 @@ public class Order extends AbstractEntity {
         this.client = client;
     }
 
+    public double getTotal() {
+        return items.stream().map(OrderItem::getSubTotal).reduce(0.0, Double::sum);
+    }
+
     public Instant getMoment() {
         return moment;
     }

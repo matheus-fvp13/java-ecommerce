@@ -10,13 +10,14 @@ public record OrderResponse(
         Long id,
         Instant moment,
         UserResponse client,
-        Set<OrderItemResponse> items
+        Set<OrderItemResponse> items,
+        Double total
 ) {
     public static OrderResponse fromOrder(Order order) {
         Set<OrderItemResponse> items = order.getItems().stream()
                 .map(OrderItemResponse::fromOrderItem)
                 .collect(Collectors.toSet());
         return new OrderResponse(order.getId(), order.getMoment(),
-                UserResponse.toUserResponse(order.getClient()), items);
+                UserResponse.toUserResponse(order.getClient()), items, order.getTotal());
     }
 }
