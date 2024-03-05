@@ -3,12 +3,15 @@ package edu.mfvp.ecommerce.domain.entities;
 import edu.mfvp.ecommerce.domain.enums.OrderStatus;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Order extends AbstractEntity {
-    Long id;
-    Instant moment;
-    Integer orderStatus;
-    User client;
+    private Long id;
+    private Instant moment;
+    private Integer orderStatus;
+    private User client;
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         super(id);
@@ -41,5 +44,9 @@ public class Order extends AbstractEntity {
 
     public void setClient(User user) {
         this.client = user;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 }

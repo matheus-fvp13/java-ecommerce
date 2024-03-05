@@ -7,8 +7,6 @@ public class Category extends AbstractEntity {
 
     private String name;
 
-    private Set<Product> products = new HashSet<>();
-
     public Category(Long id, String name) {
         super(id);
         this.name = name;
@@ -20,9 +18,5 @@ public class Category extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
     }
 }

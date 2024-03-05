@@ -1,10 +1,13 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
+import edu.mfvp.ecommerce.domain.entities.Category;
 import edu.mfvp.ecommerce.domain.entities.Product;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity(name = "tb_product")
 public class ProductEntity extends AbstractEntity {
@@ -17,6 +20,9 @@ public class ProductEntity extends AbstractEntity {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -35,7 +41,12 @@ public class ProductEntity extends AbstractEntity {
     }
 
     public Product toProduct() {
-        return new Product(this.id, this.name, this.description, this.price,this.imgUrl);
+        Product product = new Product(this.id, this.name, this.description, this.price,this.imgUrl);
+        Set<Category> categories = this.getCategories().stream()
+                .map(CategoryEntity::toCategory)
+                .collect(Collectors.toSet());
+        product.getCategories().addAll(categories);
+        return product;
     }
 
     public String getName() {
@@ -72,5 +83,13 @@ public class ProductEntity extends AbstractEntity {
 
     public Set<CategoryEntity> getCategories() {
         return categories;
+    }
+
+    public Set<OrderEntity> getOrders() {
+        Set<OrderEntity> orders = new HashSet<>();
+        for (OrderItemEntity oi : items) {
+            orders.add(oi.getOrderEntity());
+        }
+        return orders;
     }
 }

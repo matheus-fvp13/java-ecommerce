@@ -1,5 +1,6 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
+import edu.mfvp.ecommerce.domain.entities.OrderItem;
 import edu.mfvp.ecommerce.infra.database.entities.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,7 +24,11 @@ public class OrderItemEntity {
         this.price = price;
     }
 
-    public OrderEntity getOrder() {
+    public OrderItem toOrderItem() {
+        return new OrderItem(this.quantity, this.price, this.getProduct().toProduct());
+    }
+
+    public OrderEntity getOrderEntity() {
         return id.getOrder();
     }
 

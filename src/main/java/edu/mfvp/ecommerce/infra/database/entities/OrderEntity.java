@@ -2,12 +2,15 @@ package edu.mfvp.ecommerce.infra.database.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.mfvp.ecommerce.domain.entities.Order;
+import edu.mfvp.ecommerce.domain.entities.OrderItem;
 import edu.mfvp.ecommerce.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity(name = "tb_order")
 public class OrderEntity extends AbstractEntity {
@@ -36,7 +39,13 @@ public class OrderEntity extends AbstractEntity {
     }
 
     public Order toOrder() {
-        return new Order(this.id, this.moment, OrderStatus.valueOf(this.orderStatus), this.client.toUser());
+        Order order = new Order(this.id, this.moment, OrderStatus.valueOf(this.orderStatus), this.client.toUser());
+        Set<OrderItem> items = this.getItems()
+                .stream()
+                .map(OrderItemEntity::toOrderItem)
+                .collect(Collectors.toSet());
+        order.getItems().addAll(items);
+        return order;
     }
 
     public Instant getMoment() {
