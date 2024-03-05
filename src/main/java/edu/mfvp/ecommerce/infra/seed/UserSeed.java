@@ -24,13 +24,10 @@ public class UserSeed implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private OrderRepository orderRepository;
-
     @Autowired
     private CategoryRepository categoryRepository;
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -47,6 +44,14 @@ public class UserSeed implements CommandLineRunner {
         ProductEntity p5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
         categoryRepository.saveAll(List.of(cat1, cat2, cat3));
+        productRepository.saveAll(List.of(p1, p2, p3, p4, p5));
+
+        p1.getCategories().add(cat2);
+        p2.getCategories().addAll(List.of(cat1, cat3));
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+
         productRepository.saveAll(List.of(p1, p2, p3, p4, p5));
 
         UserEntity user1 = new UserEntity(null, "Matheus Vieira", "mfvp@gmail.com", "(15)11234-8978", "1234");

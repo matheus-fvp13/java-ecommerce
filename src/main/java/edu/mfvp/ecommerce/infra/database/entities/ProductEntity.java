@@ -1,8 +1,7 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
 import edu.mfvp.ecommerce.domain.entities.Product;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +12,10 @@ public class ProductEntity extends AbstractEntity {
     private String description;
     private Double price;
     private String imgUrl;
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
 
     public ProductEntity() {
