@@ -32,4 +32,9 @@ public class UserRepositoryGateway implements UserGateway {
     public User create(User user) {
         return userRepository.save(UserEntity.fromUser(user)).toUser();
     }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
 }

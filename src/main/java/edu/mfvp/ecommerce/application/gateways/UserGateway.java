@@ -8,4 +8,5 @@ public interface UserGateway {
     List<User> findAll();
     User findById(Long id);
     User create(User user);
+    void delete(Long id);
 }

@@ -23,4 +23,11 @@ public class UserService {
     public User create(User user) {
         return userGateway.create(user);
     }
+
+    public void delete(Long id) {
+        if(findById(id) == null) {
+            throw new RuntimeException("User not found!");
+        }
+        userGateway.delete(id);
+    }
 }
