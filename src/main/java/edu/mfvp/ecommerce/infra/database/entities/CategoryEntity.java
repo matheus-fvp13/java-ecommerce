@@ -1,6 +1,7 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
 import edu.mfvp.ecommerce.domain.entities.Category;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity(name = "tb_category")
 public class CategoryEntity extends AbstractEntity {
+    @Column(nullable = false, unique = true, length = 100)
     private String name;
     @ManyToMany(mappedBy = "categories")
     private Set<ProductEntity> products = new HashSet<>();

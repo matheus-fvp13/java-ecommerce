@@ -17,6 +17,7 @@ public class OrderEntity extends AbstractEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
+    @Column(nullable = false)
     private Integer orderStatus;
     @ManyToOne
     @JoinColumn(name = "client_id")

@@ -51,8 +51,8 @@ public class UserSeed implements CommandLineRunner {
 
         productRepository.saveAll(List.of(p1, p2, p3, p4, p5));
 
-        UserEntity user1 = new UserEntity(null, "Matheus Vieira", "mfvp@gmail.com", "(15)11234-8978", "1234");
-        UserEntity user2 = new UserEntity(null, "Paula Oliveira", "paula@gmail.com", "(15)11134-9978", "1254");
+        UserEntity user1 = new UserEntity(null, "Matheus", "Vieira", "mfvp@gmail.com", "(15)11234-8978", "1234");
+        UserEntity user2 = new UserEntity(null, "Paula", "Oliveira", "paula@gmail.com", "(15)11134-9978", "1254");
 
         OrderEntity o1 = new OrderEntity(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.WAITING_PAYMENT.getCode(), user1);
         OrderEntity o2 = new OrderEntity(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.PAID.getCode(), user2);

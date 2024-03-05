@@ -2,6 +2,7 @@ package edu.mfvp.ecommerce.infra.database.entities;
 
 import edu.mfvp.ecommerce.domain.entities.OrderItem;
 import edu.mfvp.ecommerce.infra.database.entities.pk.OrderItemPK;
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
@@ -11,7 +12,9 @@ import java.util.Objects;
 public class OrderItemEntity {
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
+    @Column(nullable = false)
     private Integer quantity;
+    @Column(nullable = false, precision = 10)
     private Double price;
 
     public OrderItemEntity() {

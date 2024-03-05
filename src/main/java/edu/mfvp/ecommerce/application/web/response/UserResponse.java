@@ -9,6 +9,7 @@ public record UserResponse(
         String phone
 ) {
     public static UserResponse toUserResponse(User user) {
-        return new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getPhone());
+        return new UserResponse(user.getId(), user.getFirstName() + " " + user.getLastName(),
+                user.getEmail(), user.getPhone());
     }
 }

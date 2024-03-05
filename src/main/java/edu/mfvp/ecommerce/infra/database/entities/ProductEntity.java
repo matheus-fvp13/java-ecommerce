@@ -11,9 +11,13 @@ import java.util.stream.Collectors;
 
 @Entity(name = "tb_product")
 public class ProductEntity extends AbstractEntity {
+    @Column(nullable = false, unique = true, length = 100)
     private String name;
+    @Column(columnDefinition = "text")
     private String description;
+    @Column(nullable = false, precision = 10)
     private Double price;
+    @Column(columnDefinition = "text")
     private String imgUrl;
     @ManyToMany
     @JoinTable(name = "tb_product_category",

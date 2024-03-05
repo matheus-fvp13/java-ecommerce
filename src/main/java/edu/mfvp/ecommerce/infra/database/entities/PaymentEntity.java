@@ -1,5 +1,7 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -8,6 +10,7 @@ import java.time.Instant;
 
 @Entity(name = "tb_payment")
 public class PaymentEntity extends AbstractEntity {
+    @Column(nullable = false)
     private Instant moment;
     @OneToOne
     @MapsId
