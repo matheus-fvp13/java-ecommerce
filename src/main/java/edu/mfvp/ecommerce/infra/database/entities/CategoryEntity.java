@@ -2,10 +2,17 @@ package edu.mfvp.ecommerce.infra.database.entities;
 
 import edu.mfvp.ecommerce.domain.entities.Category;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "tb_category")
 public class CategoryEntity extends AbstractEntity {
     private String name;
+
+    @Transient
+    private Set<ProductEntity> products = new HashSet<>();
 
     public CategoryEntity() {
     }
@@ -29,5 +36,9 @@ public class CategoryEntity extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
 }

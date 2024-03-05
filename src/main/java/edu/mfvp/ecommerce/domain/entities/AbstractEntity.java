@@ -2,7 +2,7 @@ package edu.mfvp.ecommerce.domain.entities;
 
 import java.util.Objects;
 
-public class AbstractEntity {
+public abstract class AbstractEntity {
     protected Long id;
 
     public AbstractEntity(Long id) {
