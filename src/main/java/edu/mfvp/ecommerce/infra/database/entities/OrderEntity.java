@@ -3,11 +3,11 @@ package edu.mfvp.ecommerce.infra.database.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.mfvp.ecommerce.domain.entities.Order;
 import edu.mfvp.ecommerce.domain.enums.OrderStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "tb_order")
 public class OrderEntity extends AbstractEntity {
@@ -18,6 +18,8 @@ public class OrderEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public OrderEntity() {
     }
@@ -51,5 +53,9 @@ public class OrderEntity extends AbstractEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public Set<OrderItemEntity> getItems() {
+        return items;
     }
 }

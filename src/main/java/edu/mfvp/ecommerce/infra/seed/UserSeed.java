@@ -1,14 +1,8 @@
 package edu.mfvp.ecommerce.infra.seed;
 
 import edu.mfvp.ecommerce.domain.enums.OrderStatus;
-import edu.mfvp.ecommerce.infra.database.entities.CategoryEntity;
-import edu.mfvp.ecommerce.infra.database.entities.OrderEntity;
-import edu.mfvp.ecommerce.infra.database.entities.ProductEntity;
-import edu.mfvp.ecommerce.infra.database.entities.UserEntity;
-import edu.mfvp.ecommerce.infra.database.repositories.CategoryRepository;
-import edu.mfvp.ecommerce.infra.database.repositories.OrderRepository;
-import edu.mfvp.ecommerce.infra.database.repositories.ProductRepository;
-import edu.mfvp.ecommerce.infra.database.repositories.UserRepository;
+import edu.mfvp.ecommerce.infra.database.entities.*;
+import edu.mfvp.ecommerce.infra.database.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +24,8 @@ public class UserSeed implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -63,5 +59,12 @@ public class UserSeed implements CommandLineRunner {
 
         userRepository.saveAll(List.of(user1, user2));
         orderRepository.saveAll(List.of(o1, o2, o3));
+
+        OrderItemEntity oi1 = new OrderItemEntity(o1, p1, 2, p1.getPrice());
+        OrderItemEntity oi2 = new OrderItemEntity(o1, p3, 1, p3.getPrice());
+        OrderItemEntity oi3 = new OrderItemEntity(o2, p3, 2, p3.getPrice());
+        OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4));
     }
 }
