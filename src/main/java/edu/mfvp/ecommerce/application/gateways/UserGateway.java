@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserGateway {
     List<User> findAll();
     User findById(Long id);
+    User create(User user);
 }

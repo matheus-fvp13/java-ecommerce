@@ -1,13 +1,14 @@
 package edu.mfvp.ecommerce.application.web.resources;
 
 import edu.mfvp.ecommerce.application.services.UserService;
+import edu.mfvp.ecommerce.application.web.request.UserCreateRequest;
 import edu.mfvp.ecommerce.application.web.response.UserResponse;
+import edu.mfvp.ecommerce.domain.entities.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,5 +33,15 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(UserResponse.toUserResponse(userService.findById(id)));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody UserCreateRequest userCreateRequest, UriComponentsBuilder ucb) {
+        User user = userService.create(userCreateRequest.toUser());
+        URI locationOfNewUser = ucb
+                .path("/users/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+        return ResponseEntity.created(locationOfNewUser).build();
     }
 }

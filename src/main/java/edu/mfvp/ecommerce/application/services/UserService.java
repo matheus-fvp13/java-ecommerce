@@ -19,4 +19,8 @@ public class UserService {
     public User findById(Long id) {
         return userGateway.findById(id);
     }
+
+    public User create(User user) {
+        return userGateway.create(user);
+    }
 }
