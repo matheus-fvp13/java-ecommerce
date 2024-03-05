@@ -1,4 +1,4 @@
-package edu.mfvp.ecommerce.domain;
+package edu.mfvp.ecommerce.domain.entities;
 
 import java.util.Objects;
 

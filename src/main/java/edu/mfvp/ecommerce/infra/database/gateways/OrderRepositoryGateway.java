@@ -1,7 +1,7 @@
 package edu.mfvp.ecommerce.infra.database.gateways;
 
 import edu.mfvp.ecommerce.application.gateways.OrderGateway;
-import edu.mfvp.ecommerce.domain.Order;
+import edu.mfvp.ecommerce.domain.entities.Order;
 import edu.mfvp.ecommerce.infra.database.entities.OrderEntity;
 import edu.mfvp.ecommerce.infra.database.repositories.OrderRepository;
 import org.springframework.stereotype.Component;

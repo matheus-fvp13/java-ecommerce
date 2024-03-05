@@ -1,4 +1,7 @@
-package edu.mfvp.ecommerce.domain;
+package edu.mfvp.ecommerce.domain.entities;
+
+import edu.mfvp.ecommerce.domain.entities.AbstractEntity;
+import edu.mfvp.ecommerce.domain.entities.Order;
 
 import java.util.ArrayList;
 import java.util.List;

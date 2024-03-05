@@ -1,7 +1,7 @@
 package edu.mfvp.ecommerce.application.services;
 
 import edu.mfvp.ecommerce.application.gateways.OrderGateway;
-import edu.mfvp.ecommerce.domain.Order;
+import edu.mfvp.ecommerce.domain.entities.Order;
 
 import java.util.List;
 

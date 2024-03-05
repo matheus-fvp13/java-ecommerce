@@ -1,6 +1,6 @@
 package edu.mfvp.ecommerce.infra.database.entities;
 
-import edu.mfvp.ecommerce.domain.User;
+import edu.mfvp.ecommerce.domain.entities.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 

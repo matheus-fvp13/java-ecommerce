@@ -1,6 +1,6 @@
 package edu.mfvp.ecommerce.application.web.response;
 
-import edu.mfvp.ecommerce.domain.User;
+import edu.mfvp.ecommerce.domain.entities.User;
 
 public record UserResponse(
         Long id,

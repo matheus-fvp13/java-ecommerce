@@ -1,6 +1,6 @@
 package edu.mfvp.ecommerce.application.web.response;
 
-import edu.mfvp.ecommerce.domain.Order;
+import edu.mfvp.ecommerce.domain.entities.Order;
 
 import java.time.Instant;
 
