@@ -8,14 +8,11 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity(name = "tb_order")
 public class OrderEntity extends AbstractEntity {
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
     @Column(nullable = false)
     private Integer orderStatus;

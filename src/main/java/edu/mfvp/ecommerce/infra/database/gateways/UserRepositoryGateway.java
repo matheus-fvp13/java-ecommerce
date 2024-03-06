@@ -2,6 +2,7 @@ package edu.mfvp.ecommerce.infra.database.gateways;
 
 import edu.mfvp.ecommerce.application.gateways.UserGateway;
 import edu.mfvp.ecommerce.domain.entities.User;
+import edu.mfvp.ecommerce.domain.exception.ResourceNotFoundException;
 import edu.mfvp.ecommerce.infra.database.entities.UserEntity;
 import edu.mfvp.ecommerce.infra.database.repositories.UserRepository;
 import org.hibernate.sql.Update;
@@ -26,7 +27,7 @@ public class UserRepositoryGateway implements UserGateway {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!")).toUser();
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)).toUser();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class UserRepositoryGateway implements UserGateway {
             userRepository.deleteById(id);
         }
         else {
-            throw new RuntimeException("User not found!");
+            throw new ResourceNotFoundException(id);
         }
     }
 
@@ -51,7 +52,7 @@ public class UserRepositoryGateway implements UserGateway {
             updateUserEntity(userEntity, user);
             return userEntity.toUser();
         } else {
-            throw new RuntimeException("User not found!");
+            throw new ResourceNotFoundException(user.getId());
         }
     }
 
