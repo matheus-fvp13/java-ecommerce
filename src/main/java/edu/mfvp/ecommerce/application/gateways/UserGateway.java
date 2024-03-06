@@ -9,4 +9,5 @@ public interface UserGateway {
     User findById(Long id);
     User create(User user);
     void delete(Long id);
+    User update(User user);
 }

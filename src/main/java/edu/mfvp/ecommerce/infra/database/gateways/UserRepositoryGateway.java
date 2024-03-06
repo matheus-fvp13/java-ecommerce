@@ -4,6 +4,7 @@ import edu.mfvp.ecommerce.application.gateways.UserGateway;
 import edu.mfvp.ecommerce.domain.entities.User;
 import edu.mfvp.ecommerce.infra.database.entities.UserEntity;
 import edu.mfvp.ecommerce.infra.database.repositories.UserRepository;
+import org.hibernate.sql.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,6 +36,31 @@ public class UserRepositoryGateway implements UserGateway {
 
     @Override
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        if(userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        }
+        else {
+            throw new RuntimeException("User not found!");
+        }
+    }
+
+    @Override
+    public User update(User user) {
+        if(userRepository.existsById(user.getId())) {
+            UserEntity userEntity = userRepository.getReferenceById(user.getId());
+            updateUserEntity(userEntity, user);
+            return userEntity.toUser();
+        } else {
+            throw new RuntimeException("User not found!");
+        }
+    }
+
+    private void updateUserEntity(UserEntity entity, User user) {
+        entity.setFirstName(user.getFirstName());
+        entity.setLastName(user.getLastName());
+        entity.setEmail(user.getEmail());
+        if(user.getPhone() != null) {
+            entity.setPhone(user.getPhone());
+        }
     }
 }

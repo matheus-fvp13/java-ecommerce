@@ -2,6 +2,7 @@ package edu.mfvp.ecommerce.application.web.resources;
 
 import edu.mfvp.ecommerce.application.services.UserService;
 import edu.mfvp.ecommerce.application.web.request.UserCreateRequest;
+import edu.mfvp.ecommerce.application.web.request.UserUpdateRequest;
 import edu.mfvp.ecommerce.application.web.response.UserResponse;
 import edu.mfvp.ecommerce.domain.entities.User;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,10 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserUpdateRequest userRequest) {
+        return ResponseEntity.ok(UserResponse.toUserResponse(userService.update(id, userRequest.toUser())));
     }
 }

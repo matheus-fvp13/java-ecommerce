@@ -25,9 +25,11 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        if(findById(id) == null) {
-            throw new RuntimeException("User not found!");
-        }
         userGateway.delete(id);
+    }
+
+    public User update(Long id, User user) {
+        user.setId(id);
+        return userGateway.update(user);
     }
 }
