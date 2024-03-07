@@ -5,6 +5,7 @@ import edu.mfvp.ecommerce.application.web.request.UserCreateRequest;
 import edu.mfvp.ecommerce.application.web.request.UserUpdateRequest;
 import edu.mfvp.ecommerce.application.web.response.UserResponse;
 import edu.mfvp.ecommerce.domain.entities.User;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,7 +24,7 @@ public class UserResource {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<List<UserResponse>> findAll() {
         List<UserResponse> users = userService.findAll().stream()
                 .map(UserResponse::toUserResponse)
@@ -31,7 +32,8 @@ public class UserResource {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}",
+            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(UserResponse.toUserResponse(userService.findById(id)));
     }
@@ -52,7 +54,8 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping(value = "{id}",
+            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserUpdateRequest userRequest) {
         return ResponseEntity.ok(UserResponse.toUserResponse(userService.update(id, userRequest.toUser())));
     }
